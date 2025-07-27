@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1b1vpjyt1smr"]
+
+[ext_resource type="Script" uid="uid://b262ao3y6bixv" path="res://Characters/player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://d4flpxknie3ci" path="res://Characters/camera_controller.tscn" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://btpuwvwggew8l" path="res://States/state_machine.gd" id="3_vb825"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sh265"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_4flbx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vb825"]
+size = Vector3(0.15, 0.15, 0.5)
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_4flbx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_sh265")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("SphereMesh_4flbx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+mesh = SubResource("BoxMesh_vb825")
+
+[node name="CameraController" parent="." instance=ExtResource("2_onrkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_vb825")

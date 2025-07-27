@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bommdncvne4g3"]
+
+[ext_resource type="Script" uid="uid://btpuwvwggew8l" path="res://States/state_machine.gd" id="1_04wy3"]
+[ext_resource type="Script" uid="uid://djtv0txbfo7ij" path="res://States/enemy_idle.gd" id="2_rtu5t"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_p6t1j"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_04wy3"]
+
+[node name="Enemy" type="CharacterBody3D"]
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_p6t1j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("SphereMesh_04wy3")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("1_04wy3")
+
+[node name="EnemyIdle" type="Node" parent="StateMachine"]
+script = ExtResource("2_rtu5t")
