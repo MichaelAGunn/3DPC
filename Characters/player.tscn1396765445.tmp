@@ -14,6 +14,15 @@ size = Vector3(0.15, 0.15, 0.5)
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_4flbx")
+walk_speed = null
+run_speed = null
+jump_height = null
+jump_time_to_peak = null
+jump_time_to_descent = null
+min_limit_x = null
+min_limit_y = null
+mouse_acc = null
+lerp_power = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -27,14 +36,13 @@ mesh = SubResource("SphereMesh_4flbx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 mesh = SubResource("BoxMesh_vb825")
 
-[node name="CameraControl" type="Node3D" parent="."]
+[node name="CameraController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraControl"]
-collision_mask = 128
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraController"]
 shape = SubResource("SphereShape3D_1foum")
-spring_length = 6.0
+spring_length = 6.5
 
-[node name="Camera3D" type="Camera3D" parent="CameraControl/SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
 
-[node name="SpringEnd" type="Node3D" parent="CameraControl/SpringArm3D"]
+[node name="SpringEnd" type="Node3D" parent="CameraController/SpringArm3D"]
