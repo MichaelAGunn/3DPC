@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://ufv6bxv33q6b"]
+
+[ext_resource type="Script" uid="uid://bpihwkrrl3cej" path="res://levels/nature.gd" id="1_m8wuy"]
+[ext_resource type="PackedScene" uid="uid://cu7p54igdtan4" path="res://characters/navigation_region.tscn" id="1_qybbe"]
+[ext_resource type="PackedScene" uid="uid://2edpwh5mfwlu" path="res://characters/navigating_npc.tscn" id="2_5ogl3"]
+[ext_resource type="Script" uid="uid://b26152d1fr8er" path="res://levels/animal_spawner.gd" id="4_lc5bs"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5ogl3"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_m8wuy"]
+sky_material = SubResource("ProceduralSkyMaterial_5ogl3")
+
+[sub_resource type="Environment" id="Environment_lc5bs"]
+background_mode = 2
+sky = SubResource("Sky_m8wuy")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Nature" type="Node3D"]
+script = ExtResource("1_m8wuy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lc5bs")
+
+[node name="NavigationRegion3D" parent="." instance=ExtResource("1_qybbe")]
+
+[node name="NavigatingNPC" parent="." instance=ExtResource("2_5ogl3")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 29.2395, 0)
+
+[node name="AnimalSpawner" type="Node" parent="."]
+script = ExtResource("4_lc5bs")
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TimerLabel" type="Label" parent="Container/VBoxContainer"]
+layout_mode = 2
+text = "Timer:"
+
+[node name="TimerValue" type="Label" parent="Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="StateLabel" type="Label" parent="Container/VBoxContainer"]
+layout_mode = 2
+text = "State:"
+
+[node name="StateValue" type="Label" parent="Container/VBoxContainer"]
+layout_mode = 2
