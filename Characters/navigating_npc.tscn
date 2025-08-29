@@ -1,6 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://2edpwh5mfwlu"]
+[gd_scene load_steps=15 format=3 uid="uid://2edpwh5mfwlu"]
 
 [ext_resource type="Script" uid="uid://dwe8dkjffdjp8" path="res://characters/navigating_npc.gd" id="1_el1yf"]
+[ext_resource type="AudioStream" uid="uid://bi5bkwv1vgbyy" path="res://assets/sfx/bleat1.wav" id="2_6127w"]
+[ext_resource type="AudioStream" uid="uid://b6autigmf7psr" path="res://assets/sfx/bleat2.wav" id="3_oyqec"]
+[ext_resource type="AudioStream" uid="uid://dx1ghmj6y5sgh" path="res://assets/sfx/bleat3.wav" id="4_ctxaw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_el1yf"]
 albedo_color = Color(0.905269, 3.34509e-06, 1.15514e-06, 1)
@@ -25,6 +28,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0.905269, 3.34509e-06, 1.15514e-06, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_el1yf"]
 resource_name = "graze"
@@ -42,6 +57,33 @@ tracks/0/keys = {
 "values": [Color(0.905269, 3.34509e-06, 1.15514e-06, 1), Color(0.761578, 0.000843251, 0.82738, 1), Color(0.761578, 0.000843251, 0.82738, 1), Color(0.905269, 3.34509e-06, 1.15514e-06, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_oyqec"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.905269, 3.34509e-06, 1.15514e-06, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_tw3jb"]
 resource_name = "vocalize"
 tracks/0/type = "value"
@@ -57,12 +99,47 @@ tracks/0/keys = {
 "values": [Color(0.905269, 3.34509e-06, 1.15514e-06, 1), Color(1, 0.469494, 0.401435, 1), Color(0.905269, 3.34509e-06, 1.15514e-06, 1), Color(1, 0.469494, 0.401435, 1), Color(0.905269, 3.34509e-06, 1.15514e-06, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_6127w"]
+resource_name = "wander"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.174533), Vector3(0, 0, 0), Vector3(0, 0, 0.174533), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.905269, 3.34509e-06, 1.15514e-06, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6127w"]
 _data = {
 &"RESET": SubResource("Animation_vavwj"),
 &"graze": SubResource("Animation_el1yf"),
-&"vocalize": SubResource("Animation_tw3jb")
+&"idle": SubResource("Animation_oyqec"),
+&"vocalize": SubResource("Animation_tw3jb"),
+&"wander": SubResource("Animation_6127w")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5v820"]
+streams_count = 3
+stream_0/stream = ExtResource("2_6127w")
+stream_1/stream = ExtResource("3_oyqec")
+stream_2/stream = ExtResource("4_ctxaw")
 
 [node name="NavigatingNPC" type="CharacterBody3D"]
 script = ExtResource("1_el1yf")
@@ -77,6 +154,7 @@ shape = SubResource("ConvexPolygonShape3D_el1yf")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 0.8
+path_height_offset = 0.5
 debug_enabled = true
 
 [node name="StateTimer" type="Timer" parent="."]
@@ -85,6 +163,9 @@ debug_enabled = true
 libraries = {
 &"": SubResource("AnimationLibrary_6127w")
 }
+
+[node name="Vocalizer" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_5v820")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_state_timer_timeout"]

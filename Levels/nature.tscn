@@ -33,7 +33,7 @@ environment = SubResource("Environment_lc5bs")
 [node name="NavigatingNPC" parent="." instance=ExtResource("2_5ogl3")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 29.2395, 0)
+transform = Transform3D(1, 0, 0, 0, 0.976417, 0.215894, 0, -0.215894, 0.976417, 0, 3.34748, 8.7114)
 
 [node name="AnimalSpawner" type="Node" parent="."]
 script = ExtResource("4_lc5bs")
