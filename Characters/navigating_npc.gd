@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 enum States {IDLE, WANDER, GRAZE, VOCALIZE}
+
 var state: int = 0
 var target_location: Vector3
 var data: Dictionary = {
@@ -43,13 +44,8 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func idle() -> void:
+	animation_player.play('idle')
 	navigation_agent_3d.set_target_position(Vector3.ZERO)
-
-func find_wander_target() -> void:
-	var direction := Vector3.ZERO
-	direction.x += randf_range(-5.0, 5.0)
-	direction.z += randf_range(-5.0, 5.0)
-	navigation_agent_3d.set_target_position(direction)
 
 func wander() -> void:
 	animation_player.play('wander')
@@ -67,18 +63,26 @@ func vocalize() -> void:
 
 func change_state(next_state) -> void:
 	'''State Transition Logic'''
-	print("Changing from " + str(state) + " to " + str(next_state) + ".")
+	# Cleanup before changing state.
+	animation_player.stop()
 	if next_state == States.WANDER:
 		find_wander_target()
 	match state:
 		States.WANDER:
 			navigation_agent_3d.set_target_position(Vector3.ZERO)
 			velocity = Vector3.ZERO
-		States.GRAZE or States.VOCALIZE:
-			animation_player.stop()
-	#var prev_state = state
+		#States.GRAZE or States.VOCALIZE:
+			#animation_player.stop()
+	# Change state now!
 	state = next_state
+	# Post state changes.
 	state_timer.start(data[state]['duration'])
+
+func find_wander_target() -> void:
+	var direction: Vector3 = global_transform.origin
+	direction.x += randf_range(-5.0, 5.0)
+	direction.z += randf_range(-5.0, 5.0)
+	navigation_agent_3d.set_target_position(direction)
 
 func _on_state_timer_timeout():
 	'''Invoke State Transition Upon Timeout'''

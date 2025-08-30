@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ufv6bxv33q6b"]
+[gd_scene load_steps=7 format=3 uid="uid://ufv6bxv33q6b"]
 
-[ext_resource type="Script" uid="uid://bpihwkrrl3cej" path="res://levels/nature.gd" id="1_m8wuy"]
 [ext_resource type="PackedScene" uid="uid://cu7p54igdtan4" path="res://characters/navigation_region.tscn" id="1_qybbe"]
-[ext_resource type="PackedScene" uid="uid://2edpwh5mfwlu" path="res://characters/navigating_npc.tscn" id="2_5ogl3"]
-[ext_resource type="Script" uid="uid://b26152d1fr8er" path="res://levels/animal_spawner.gd" id="4_lc5bs"]
+[ext_resource type="Script" uid="uid://u2jq53soyjqw" path="res://levels/spawner_3d.gd" id="3_nhfw5"]
+[ext_resource type="PackedScene" uid="uid://b1b1vpjyt1smr" path="res://characters/player.tscn" id="5_nhfw5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5ogl3"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -19,7 +18,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Nature" type="Node3D"]
-script = ExtResource("1_m8wuy")
+script = ExtResource("3_nhfw5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -30,14 +29,6 @@ environment = SubResource("Environment_lc5bs")
 
 [node name="NavigationRegion3D" parent="." instance=ExtResource("1_qybbe")]
 
-[node name="NavigatingNPC" parent="." instance=ExtResource("2_5ogl3")]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.976417, 0.215894, 0, -0.215894, 0.976417, 0, 3.34748, 8.7114)
-
-[node name="AnimalSpawner" type="Node" parent="."]
-script = ExtResource("4_lc5bs")
-
 [node name="Container" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -45,22 +36,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+[node name="DebugNPCs" type="HBoxContainer" parent="Container"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+alignment = 1
 
-[node name="TimerLabel" type="Label" parent="Container/VBoxContainer"]
-layout_mode = 2
-text = "Timer:"
+[node name="SpawnNPCs" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1449, 0, -5.04843)
 
-[node name="TimerValue" type="Label" parent="Container/VBoxContainer"]
-layout_mode = 2
+[node name="SpawnTimer" type="Timer" parent="SpawnNPCs"]
 
-[node name="StateLabel" type="Label" parent="Container/VBoxContainer"]
-layout_mode = 2
-text = "State:"
+[node name="Player" parent="." instance=ExtResource("5_nhfw5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.23564)
 
-[node name="StateValue" type="Label" parent="Container/VBoxContainer"]
-layout_mode = 2
+[connection signal="timeout" from="SpawnNPCs/SpawnTimer" to="." method="_on_spawn_timer_timeout"]

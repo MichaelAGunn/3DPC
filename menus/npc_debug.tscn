@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://djocnh4irccho"]
+
+[node name="VBox" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Timer:"
+
+[node name="TimerValue" type="Label" parent="."]
+layout_mode = 2
+
+[node name="StateLabel" type="Label" parent="."]
+layout_mode = 2
+text = "State:"
+
+[node name="StateValue" type="Label" parent="."]
+layout_mode = 2
