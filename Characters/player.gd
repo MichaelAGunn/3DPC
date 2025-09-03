@@ -12,13 +12,13 @@ var mouse_sensitivity: float = 0.15
 @export var mouse_acc: float = 0.005
 @export var lerp_power: float = 1.0
 @onready var camera_control = $CameraControl
-@onready var spring_arm_3d = $CameraController/SpringArm3D
-@onready var camera_3d = $CameraController/SpringArm3D/Camera3D
-@onready var spring_end = $CameraController/SpringArm3D/SpringEnd
+@onready var spring_arm_3d = $CameraControl/SpringArm3D
+@onready var camera_3d = $CameraControl/SpringArm3D/Camera3D
 
 # Movement vars
 @export var walk_speed: float = 4.0
 @export var run_speed: float = 12.0
+@onready var body = $MeshInstance3D
 
 # Jumping vars
 @export var jump_height: float = 1.0
@@ -64,7 +64,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 func _physics_process(delta: float) -> void:
 	# Camera by Mouse
-	camera_control.rotation.x += _mouse_input_dir.y * delta
+	camera_control.rotation.x -= _mouse_input_dir.y * delta
 	camera_control.rotation.x = clamp(camera_control.rotation.x, -PI/2.0, PI/8.0)
 	camera_control.rotation.y -= _mouse_input_dir.x * delta
 	_mouse_input_dir = Vector2.ZERO
