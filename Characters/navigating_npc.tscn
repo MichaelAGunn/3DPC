@@ -44,6 +44,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D/MeshInstance3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.501404, -0.520235)]
+}
 
 [sub_resource type="Animation" id="Animation_el1yf"]
 resource_name = "graze"
@@ -51,14 +63,14 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/path = NodePath("MeshInstance3D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.366667, 0.633333, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333, 0.54, 0.77, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(0.905269, 3.34509e-06, 1.15514e-06, 1), Color(0.761578, 0.000843251, 0.82738, 1), Color(0.761578, 0.000843251, 0.82738, 1), Color(0.905269, 3.34509e-06, 1.15514e-06, 1)]
+"values": [Vector3(0, 0, 0), Vector3(-0.349066, 0, 0), Vector3(-0.111753, 0, 0), Vector3(-0.349066, 0, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_oyqec"]
@@ -93,14 +105,14 @@ resource_name = "vocalize"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/path = NodePath("MeshInstance3D/MeshInstance3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5, 0.7, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(0.905269, 3.34509e-06, 1.15514e-06, 1), Color(1, 0.469494, 0.401435, 1), Color(0.905269, 3.34509e-06, 1.15514e-06, 1), Color(1, 0.469494, 0.401435, 1), Color(0.905269, 3.34509e-06, 1.15514e-06, 1)]
+"values": [Vector3(0, 0.501404, -0.520235), Vector3(0, 0.601655, -0.520235), Vector3(0, 0.462228, -0.520235), Vector3(0, 0.501404, -0.520235)]
 }
 
 [sub_resource type="Animation" id="Animation_6127w"]
@@ -131,6 +143,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6127w"]
+resource_local_to_scene = true
 _data = {
 &"RESET": SubResource("Animation_vavwj"),
 &"graze": SubResource("Animation_el1yf"),

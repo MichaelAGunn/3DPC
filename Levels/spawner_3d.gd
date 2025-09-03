@@ -16,7 +16,7 @@ func _process(_delta: float) -> void:
 	var vboxes = debug_npcs.get_children()
 	if len(vboxes) > 0:
 		for idx in range(len(vboxes)):
-			print("LENGTHS o NPCS: " + str(len(npc_list)) + " & VBOX: " + str(len(vboxes)))
+			#print("LENGTHS o' NPCS: " + str(len(npc_list)) + " & VBOX: " + str(len(vboxes)))
 			vboxes[idx].get_child(0).text = 'NPC' + str(idx + 1)
 			var time: String = str(npc_list[idx].get_child(3).wait_time)
 			vboxes[idx].get_child(2).text = time
