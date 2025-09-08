@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://iishkk4cd1xs"
-path.s3tc="res://.godot/imported/blue_grid.png-101a4c54ecc5d690f5a8a62226ab494e.s3tc.ctex"
+path.s3tc="res://.godot/imported/blue_grid.png-6fc0d65ecda66a5f30eaae1b1b6aca7a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/blue_grid.png"
-dest_files=["res://.godot/imported/blue_grid.png-101a4c54ecc5d690f5a8a62226ab494e.s3tc.ctex"]
+source_file="res://assets/materials/blue_grid.png"
+dest_files=["res://.godot/imported/blue_grid.png-6fc0d65ecda66a5f30eaae1b1b6aca7a.s3tc.ctex"]
 
 [params]
 

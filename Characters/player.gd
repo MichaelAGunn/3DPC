@@ -4,6 +4,7 @@ class_name Player
 var paused: bool = false
 var movement_input := Vector2.ZERO
 var _mouse_input_dir := Vector2.ZERO
+var _last_movement_dir := Vector3.BACK
 var mouse_sensitivity: float = 0.15
 
 # Camera vars
@@ -88,6 +89,10 @@ func moving(delta: float) -> void:
 		vel_2d = vel_2d.move_toward(Vector2.ZERO, (speed ** 2) * delta)
 	velocity.x = vel_2d.x
 	velocity.z = vel_2d.y
+	if movement_input.length() > 0.2:
+		_last_movement_dir = velocity
+	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_dir, Vector3.UP)
+	body.global_rotation.y = target_angle
 
 func jumping(delta: float) -> void:
 	var gravity = jump_gravity if velocity.y > 0.0 else fall_gravity

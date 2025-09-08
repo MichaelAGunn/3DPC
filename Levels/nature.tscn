@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ufv6bxv33q6b"]
+[gd_scene load_steps=8 format=3 uid="uid://ufv6bxv33q6b"]
 
 [ext_resource type="PackedScene" uid="uid://cu7p54igdtan4" path="res://characters/navigation_region.tscn" id="1_qybbe"]
 [ext_resource type="Script" uid="uid://u2jq53soyjqw" path="res://levels/spawner_3d.gd" id="3_nhfw5"]
+[ext_resource type="PackedScene" uid="uid://tqldd8nrpilt" path="res://characters/toadstool.tscn" id="4_lc5bs"]
 [ext_resource type="PackedScene" uid="uid://b1b1vpjyt1smr" path="res://characters/player.tscn" id="5_nhfw5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5ogl3"]
@@ -30,6 +31,7 @@ environment = SubResource("Environment_lc5bs")
 [node name="NavigationRegion3D" parent="." instance=ExtResource("1_qybbe")]
 
 [node name="Container" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,5 +53,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1449, 0, -5.04843)
 
 [node name="Player" parent="." instance=ExtResource("5_nhfw5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.23564)
+
+[node name="Toadstool" parent="." instance=ExtResource("4_lc5bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9648, 3.8147e-06, 3.17903)
 
 [connection signal="timeout" from="SpawnNPCs/SpawnTimer" to="." method="_on_spawn_timer_timeout"]

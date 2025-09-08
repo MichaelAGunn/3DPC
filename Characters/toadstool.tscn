@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://tqldd8nrpilt"]
+
+[ext_resource type="PackedScene" uid="uid://ct15jk3uq87ih" path="res://assets/meshes/mushroom.blend" id="1_b3fef"]
+
+[node name="Toadstool" type="Node3D"]
+
+[node name="mushroom" parent="." instance=ExtResource("1_b3fef")]
+
+[editable path="mushroom"]
