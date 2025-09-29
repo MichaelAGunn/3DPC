@@ -20,6 +20,8 @@ var mouse_sensitivity: float = 0.15
 @export var walk_speed: float = 4.0
 @export var run_speed: float = 12.0
 @onready var body = $MeshInstance3D
+@onready var rubber_man = $rubber_man
+#@onready var armature = rubber_man.rubber_skeleton.skeleton_3d
 
 # Jumping vars
 @export var jump_height: float = 1.0
