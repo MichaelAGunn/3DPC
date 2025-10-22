@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1b1vpjyt1smr"]
+[gd_scene load_steps=8 format=3 uid="uid://b1b1vpjyt1smr"]
 
 [ext_resource type="Script" uid="uid://b262ao3y6bixv" path="res://characters/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://urgcfuy0dho2" path="res://assets/meshes/rubber_man.blend" id="2_3eadt"]
@@ -11,6 +11,9 @@
 size = Vector3(0.15, 0.15, 0.5)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1foum"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3eadt"]
+size = Vector3(0.3, 0.3, 0.3)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -36,8 +39,33 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraControl"]
-collision_mask = 128
 shape = SubResource("SphereShape3D_1foum")
 spring_length = 6.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraControl/SpringArm3D"]
+
+[node name="HitBoxes" type="Node3D" parent="."]
+
+[node name="HitFront" type="Area3D" parent="HitBoxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
+
+[node name="Cube" type="CollisionShape3D" parent="HitBoxes/HitFront"]
+shape = SubResource("BoxShape3D_3eadt")
+
+[node name="HitBack" type="Area3D" parent="HitBoxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+
+[node name="Cube" type="CollisionShape3D" parent="HitBoxes/HitBack"]
+shape = SubResource("BoxShape3D_3eadt")
+
+[node name="HitLeft" type="Area3D" parent="HitBoxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
+
+[node name="Cube" type="CollisionShape3D" parent="HitBoxes/HitLeft"]
+shape = SubResource("BoxShape3D_3eadt")
+
+[node name="HitRight" type="Area3D" parent="HitBoxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0)
+
+[node name="Cube" type="CollisionShape3D" parent="HitBoxes/HitRight"]
+shape = SubResource("BoxShape3D_3eadt")

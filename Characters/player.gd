@@ -8,10 +8,10 @@ var _last_movement_dir := Vector3.BACK
 var mouse_sensitivity: float = 0.15
 
 # Camera vars
-@export_range(-90.0, 0.0, 0.1, "radians_as_degrees") var min_limit_x: float = -PI/2
-@export_range(-90.0, 0.0, 0.1, "radians_as_degrees") var min_limit_y: float = PI/3
-@export var mouse_acc: float = 0.005
-@export var lerp_power: float = 1.0
+#@export_range(-90.0, 0.0, 0.1, "radians_as_degrees") var min_limit_x: float = -PI/2
+#@export_range(-90.0, 0.0, 0.1, "radians_as_degrees") var min_limit_y: float = PI/3
+#@export var mouse_acc: float = 0.005
+#@export var lerp_power: float = 1.0
 @onready var camera_control = $CameraControl
 @onready var spring_arm_3d = $CameraControl/SpringArm3D
 @onready var camera_3d = $CameraControl/SpringArm3D/Camera3D
@@ -94,7 +94,7 @@ func moving(delta: float) -> void:
 	if movement_input.length() > 0.2:
 		_last_movement_dir = velocity
 	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_dir, Vector3.UP)
-	body.global_rotation.y = target_angle
+	rubber_man.global_rotation.y = target_angle
 
 func jumping(delta: float) -> void:
 	var gravity = jump_gravity if velocity.y > 0.0 else fall_gravity
